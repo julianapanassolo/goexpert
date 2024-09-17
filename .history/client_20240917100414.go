@@ -35,7 +35,7 @@ func main() {
 	// Lê o corpo da respostaosta
 	body, erro := ioutil.ReadAll(resposta.Body)
 	if erro != nil {
-		log.Printf("erroo ao ler resposta: %v", erro)
+		log.Printf("erroo ao ler respostaosta: %v", erro)
 		return
 	}
 
