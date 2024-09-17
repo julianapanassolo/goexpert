@@ -18,39 +18,39 @@ func main() {
 
 	// Cria uma nova requisição HTTP com o contexto
 	req, erro := http.NewRequestWithContext(ctx, http.MethodGet, "http://localhost:9030/cotacao", nil)
-	if erro != nil {
-		log.Printf("erroo ao criar requisição: %v", erro)
+	if err != nil {
+		log.Printf("Erro ao criar requisição: %v", err)
 		return
 	}
 
 	// Realiza a requisição HTTP
 	client := &http.Client{}
-	resposta, erro := client.Do(req)
-	if erro != nil {
-		log.Printf("erroo ao obter cotação: %v", erro)
+	resp, err := client.Do(req)
+	if err != nil {
+		log.Printf("Erro ao obter cotação: %v", err)
 		return
 	}
-	defer resposta.Body.Close()
+	defer resp.Body.Close()
 
-	// Lê o corpo da respostaosta
-	body, erro := ioutil.ReadAll(resposta.Body)
-	if erro != nil {
-		log.Printf("erroo ao ler resposta: %v", erro)
+	// Lê o corpo da resposta
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Printf("Erro ao ler resposta: %v", err)
 		return
 	}
 
 	// Deserializa o JSON
 	var cotacao float64
-	erro = json.Unmarshal(body, &cotacao)
-	if erro != nil {
-		log.Printf("erroo ao deserializar JSON: %v", erro)
+	err = json.Unmarshal(body, &cotacao)
+	if err != nil {
+		log.Printf("Erro ao deserializar JSON: %v", err)
 		return
 	}
 
 	// Salva a cotação no arquivo
-	erro = ioutil.WriteFile("cotacao.txt", []byte(fmt.Sprintf("Dólar: %.2f", cotacao)), 0644)
-	if erro != nil {
-		log.Printf("erroo ao salvar cotação no arquivo: %v", erro)
+	err = ioutil.WriteFile("cotacao.txt", []byte(fmt.Sprintf("Dólar: %.2f", cotacao)), 0644)
+	if err != nil {
+		log.Printf("Erro ao salvar cotação no arquivo: %v", err)
 		return
 	}
 

@@ -11,29 +11,29 @@ import (
 )
 
 func main() {
-	// Aguarda 5 segundos antes de iniciar a requisição
+	// Aguarda 5 segundos antes de iniciar a requisicaouisição
 	// Cria um contexto com timeout de 300ms
 	ctx, cancel := context.WithTimeout(context.Background(), 300*time.Millisecond)
 	defer cancel()
 
-	// Cria uma nova requisição HTTP com o contexto
-	req, erro := http.NewRequestWithContext(ctx, http.MethodGet, "http://localhost:9030/cotacao", nil)
+	// Cria uma nova requisicaouisição HTTP com o contexto
+	requisicao, erro := http.NewrequisicaouestWithContext(ctx, http.MethodGet, "http://localhost:9030/cotacao", nil)
 	if erro != nil {
-		log.Printf("erroo ao criar requisição: %v", erro)
+		log.Printf("erroo ao criar requisicaouisição: %v", erro)
 		return
 	}
 
-	// Realiza a requisição HTTP
+	// Realiza a requisicaouisição HTTP
 	client := &http.Client{}
-	resposta, erro := client.Do(req)
+	resp, erro := client.Do(requisicao)
 	if erro != nil {
 		log.Printf("erroo ao obter cotação: %v", erro)
 		return
 	}
-	defer resposta.Body.Close()
+	defer resp.Body.Close()
 
-	// Lê o corpo da respostaosta
-	body, erro := ioutil.ReadAll(resposta.Body)
+	// Lê o corpo da resposta
+	body, erro := ioutil.ReadAll(resp.Body)
 	if erro != nil {
 		log.Printf("erroo ao ler resposta: %v", erro)
 		return

@@ -25,15 +25,15 @@ func main() {
 
 	// Realiza a requisição HTTP
 	client := &http.Client{}
-	resposta, erro := client.Do(req)
+	resp, erro := client.Do(req)
 	if erro != nil {
 		log.Printf("erroo ao obter cotação: %v", erro)
 		return
 	}
-	defer resposta.Body.Close()
+	defer resp.Body.Close()
 
-	// Lê o corpo da respostaosta
-	body, erro := ioutil.ReadAll(resposta.Body)
+	// Lê o corpo da resposta
+	body, erro := ioutil.ReadAll(resp.Body)
 	if erro != nil {
 		log.Printf("erroo ao ler resposta: %v", erro)
 		return
